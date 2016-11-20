@@ -29,8 +29,8 @@ public class MazeTest {
 		maze2.setSeed(seed);
 		maze2.generateMaze();
 		
-		Node[] adjacencyList1 = maze_1.getMaze();
-		Node[] adjacencyList2 = maze_2.getMaze();
+		LinkedList[] adjacencyList1 = maze_1.getMaze();
+		LinkedList[] adjacencyList2 = maze_2.getMaze();
 		
 		for(int index = 0;index < adjacencyList1.size;index++) {
 			Node current1 = adjacencyList1[index];

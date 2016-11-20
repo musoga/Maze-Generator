@@ -7,7 +7,7 @@ public class LinkedList {
 	
 	// Adds a value into the front of the linked list
 	public void add(int newValue) {
-		Node next = head.next;
+		Node next = head;
 		
 		Node newNode = new Node();
 		newNode.setValue(newValue);
