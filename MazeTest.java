@@ -33,8 +33,8 @@ public class MazeTest {
 		LinkedList[] adjacencyList2 = maze_2.getMaze();
 		
 		for(int index = 0;index < adjacencyList1.size;index++) {
-			Node current1 = adjacencyList1[index];
-			Node current2 = adjacencyList1[index];
+			LinkedList.Node current1 = adjacencyList1[index].head;
+			LinkedList.Node current2 = adjacencyList2[index].head;
 			
 			while(current1 != null && current2 != null) {
 				assertEquals(current1.getValue(), current2.getValue());
