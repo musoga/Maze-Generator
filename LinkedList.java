@@ -6,19 +6,31 @@ public class LinkedList {
 		length = 0;
 	}
 	
-	// Adds a value into the front of the linked list
-	public void add(int newValue) {
+	/**
+   Adds a value to the beginning of the linked list
+
+   @param nodeToAdd node that represents a vertex to be added to list
+
+   @return void
+
+	*/
+	public void add(Node nodeToAdd) {
 		Node next = head;
 		
-		Node newNode = new Node();
-		newNode.setValue(newValue);
-		
-		head = newNode;
-		newNode.next = next;
+		head = nodeToAdd;
+		nodeToAdd.next = next;
 		
 		length++;
 	}
 	
+	/**
+   Returns the length of the list
+
+   @param none
+
+   @return void
+
+	*/
 	public int length() {
 		return length;
 	}
