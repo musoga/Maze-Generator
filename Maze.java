@@ -17,7 +17,11 @@ public class Maze {
 
 	*/
 	Maze(int startHeight, int startWidth) {
+		mazeGraph = new LinkedList[height * width];
+		
+		randomGenerator = new Random();
 		randomGenerator.setSeed(System.currentTimeMillis());
+		
 		height = startHeight;
 		width = startWidth;
 		
@@ -67,7 +71,7 @@ public class Maze {
    @return ArrayList<Node> List of neighbors to use for maze generation
 
 	*/
-	private ArrayList<Node> findNeighbors(LinkedList currentCell, int position) {
+	public ArrayList<Node> findNeighbors(LinkedList currentCell, int position) {
 		ArrayList<Node> neighbors = new ArrayList<Node>();
 		
 		final int MAX_NEIGHBORS = 4;
@@ -83,8 +87,8 @@ public class Maze {
 			
 			int initialValue = neighborPosition[index] < 1 
 								|| neighborPosition[index] > height * width
-								|| position % width == 0 && neighborPosition[index] - position == 1
-								|| position % width == 1 && position - neighborPosition[index] == 1
+								|| position + 1 % width == 0 && neighborPosition[index] - position == 1
+								|| position + 1 % width == 1 && position - neighborPosition[index] == 1
 								? -1 : neighborPosition[index];
 			
 			cellToConsider.setPosition(initialValue);

@@ -2,8 +2,12 @@ package sjsu.cs146.project3;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import 
 
 public class MazeTest {
 
@@ -52,8 +56,17 @@ public class MazeTest {
 	@Test
 	public void testFindNeighbors() {
 		LinkedList vertex = new LinkedList();
-		//TODO - finish implementing test
-		vertex.head.setPosition(1);
+		int position = 0;
+		
+		int height = 5;
+		int width = 5;
+		Maze maze = new Maze(height, width);
+		
+		ArrayList<Node> neighbors = maze.findNeighbors(vertex, position);
+		int[] trueNeighbors = {1,5};
+		
+		//TODO - finish tests for all cases
+		
 	}
 	
 	@Test
