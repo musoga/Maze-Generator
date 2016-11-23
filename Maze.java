@@ -20,6 +20,8 @@ public class Maze {
 		randomGenerator.setSeed(System.currentTimeMillis());
 		height = startHeight;
 		width = startWidth;
+		
+		//TODO - initialize position parameter 
 	}
 	
 	public LinkedList[] getMazeGraph() {
@@ -43,12 +45,13 @@ public class Maze {
 		Stack<Node> cellStack = new Stack<Node>();
 		int totalCells = height * width;
 		
-		LinkedList currentCell = mazeGraph[0];
+		int position = 0;
+		LinkedList currentCell = mazeGraph[position];
 		
 		int visitedCells = 1;
 		
 		while(visitedCells < totalCells) {
-			ArrayList<Node> neighbors = findNeighbors(currentCell);
+			ArrayList<Node> neighbors = findNeighbors(currentCell, position);
 			
 			int randomNeighbor = randomGenerator.nextInt(neighbors.size());
 			//TODO - finish implementing function
@@ -64,30 +67,29 @@ public class Maze {
    @return ArrayList<Node> List of neighbors to use for maze generation
 
 	*/
-	private ArrayList<Node> findNeighbors(LinkedList currentCell) {
+	private ArrayList<Node> findNeighbors(LinkedList currentCell, int position) {
 		ArrayList<Node> neighbors = new ArrayList<Node>();
-		Node current = currentCell.head;
 		
-		int maxNeighbors = 4;
+		final int MAX_NEIGHBORS = 4;
 		
-		int[] neighborPosition = { current.getPosition() - width, 
-											current.getPosition() - 1, 
-											current.getPosition() + 1, 
-											current.getPosition() + width };
+		int[] neighborPosition = { position - width, 
+											position - 1, 
+											position + 1, 
+											position + width };
 		
-		for(int index = 0;index < maxNeighbors;index++) {
+		for(int index = 0;index < MAX_NEIGHBORS;index++) {
 			Node cellToConsider = new Node();
 			cellToConsider.setPosition(neighborPosition[index]);
 			
 			int initialValue = neighborPosition[index] < 1 
 								|| neighborPosition[index] > height * width
-								|| current.getPosition() % width == 0 && neighborPosition[index] - current.getPosition() == 1
-								|| current.getPosition() % width == 1 && current.getPosition() - neighborPosition[index] == 1
-								? -1 : 0;
+								|| position % width == 0 && neighborPosition[index] - position == 1
+								|| position % width == 1 && position - neighborPosition[index] == 1
+								? -1 : neighborPosition[index];
 			
-			cellToConsider.setValue(initialValue);
+			cellToConsider.setPosition(initialValue);
 			
-			if(cellToConsider.getValue() == 0) {
+			if(cellToConsider.getPosition() != -1) {
 				neighbors.add(cellToConsider);
 			}
 		}
