@@ -49,6 +49,8 @@ public class Maze {
 		
 		while(visitedCells < totalCells) {
 			ArrayList<Node> neighbors = findNeighbors(currentCell);
+			
+			int randomNeighbor = randomGenerator.nextInt(neighbors.size());
 			//TODO - finish implementing function
 		}
 	}
@@ -77,10 +79,10 @@ public class Maze {
 			Node cellToConsider = new Node();
 			cellToConsider.setPosition(neighborPosition[index]);
 			
-			int initialValue = neighborPosition[index] < 0 
+			int initialValue = neighborPosition[index] < 1 
 								|| neighborPosition[index] > height * width
 								|| current.getPosition() % width == 0 && neighborPosition[index] - current.getPosition() == 1
-								|| current.getPosition() % width + 1 == 0 && neighborPosition[index] - current.getPosition() == 1
+								|| current.getPosition() % width == 1 && current.getPosition() - neighborPosition[index] == 1
 								? -1 : 0;
 			
 			cellToConsider.setValue(initialValue);
