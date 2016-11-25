@@ -6,8 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import 
+ 
 
 public class MazeTest {
 
@@ -56,17 +55,30 @@ public class MazeTest {
 	@Test
 	public void testFindNeighbors() {
 		LinkedList vertex = new LinkedList();
-		int position = 0;
 		
 		int height = 5;
 		int width = 5;
 		Maze maze = new Maze(height, width);
 		
-		ArrayList<Node> neighbors = maze.findNeighbors(vertex, position);
-		int[] trueNeighbors = {1,5};
+		int[] positionsToTest = {0,2,4,10,14,20,22,24};
+		int[][] neighborsToCheck = {{1,5},
+				{1,3,7},
+				{3,9},
+				{5,11,15},
+				{9,13,19},
+				{15,21},
+				{17,21,23},
+				{19,23}};
 		
-		//TODO - finish tests for all cases
+		final int TEST_CASES = 8;
 		
+		for(int testCase = 0;testCase < TEST_CASES;testCase++) {
+			ArrayList<Node> neighbors = maze.findNeighbors(vertex, positionsToTest[testCase]);
+			
+			for(int index = 0;index < neighbors.size();index++) {
+				assertEquals(neighborsToCheck[testCase][index], neighbors.get(index).getPosition());
+			}
+		}
 	}
 	
 	@Test

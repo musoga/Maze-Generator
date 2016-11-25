@@ -85,10 +85,10 @@ public class Maze {
 			Node cellToConsider = new Node();
 			cellToConsider.setPosition(neighborPosition[index]);
 			
-			int initialValue = neighborPosition[index] < 1 
-								|| neighborPosition[index] > height * width
-								|| position + 1 % width == 0 && neighborPosition[index] - position == 1
-								|| position + 1 % width == 1 && position - neighborPosition[index] == 1
+			int initialValue = neighborPosition[index] < 0 
+								|| neighborPosition[index] >= height * width
+								|| (position + 1) % width == 0 && neighborPosition[index] - position == 1
+								|| (position + 1) % width == 1 && position - neighborPosition[index] == 1
 								? -1 : neighborPosition[index];
 			
 			cellToConsider.setPosition(initialValue);
