@@ -17,15 +17,17 @@ public class Maze {
 
 	*/
 	Maze(int startHeight, int startWidth) {
-		mazeGraph = new LinkedList[height * width];
-		
 		randomGenerator = new Random();
 		randomGenerator.setSeed(System.currentTimeMillis());
 		
 		height = startHeight;
 		width = startWidth;
 		
-		//TODO - initialize position parameter 
+		mazeGraph = new LinkedList[height * width];
+		
+		for(int index = 0;index < mazeGraph.length;index++) {
+			mazeGraph[index] = new LinkedList();
+		}
 	}
 	
 	public LinkedList[] getMazeGraph() {
@@ -46,19 +48,30 @@ public class Maze {
 
 	*/
 	public void generateMaze() {
-		Stack<Node> cellStack = new Stack<Node>();
+		Stack<Integer> cellStack = new Stack<Integer>();
 		int totalCells = height * width;
 		
-		int position = 0;
-		LinkedList currentCell = mazeGraph[position];
+		int currentCell = 0;
 		
 		int visitedCells = 1;
 		
 		while(visitedCells < totalCells) {
-			ArrayList<Node> neighbors = findNeighbors(currentCell, position);
+			ArrayList<Node> neighbors = findNeighbors(currentCell);
 			
-			int randomNeighbor = randomGenerator.nextInt(neighbors.size());
-			//TODO - finish implementing function
+			if(neighbors.size() > 0) {
+				int randomNeighborPosition = randomGenerator.nextInt(neighbors.size());
+				Node randomNeighbor = new Node();
+				randomNeighbor.setPosition(randomNeighborPosition);
+				
+				mazeGraph[currentCell].add(randomNeighbor);
+				
+				cellStack.push(currentCell);
+				currentCell = randomNeighborPosition;
+				visitedCells++;
+			}
+			else {
+				currentCell = cellStack.pop();
+			}
 		}
 	}
 	
@@ -71,7 +84,7 @@ public class Maze {
    @return ArrayList<Node> List of neighbors to use for maze generation
 
 	*/
-	public ArrayList<Node> findNeighbors(LinkedList currentCell, int position) {
+	public ArrayList<Node> findNeighbors(int position) {
 		ArrayList<Node> neighbors = new ArrayList<Node>();
 		
 		final int MAX_NEIGHBORS = 4;

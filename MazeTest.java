@@ -73,7 +73,7 @@ public class MazeTest {
 		final int TEST_CASES = 8;
 		
 		for(int testCase = 0;testCase < TEST_CASES;testCase++) {
-			ArrayList<Node> neighbors = maze.findNeighbors(vertex, positionsToTest[testCase]);
+			ArrayList<Node> neighbors = maze.findNeighbors(positionsToTest[testCase]);
 			
 			for(int index = 0;index < neighbors.size();index++) {
 				assertEquals(neighborsToCheck[testCase][index], neighbors.get(index).getPosition());
