@@ -23,7 +23,7 @@ public class MazeTest {
 		int height = 5;
 		int width = 5;
 		
-		Maze maze1 = new Maze(5, 5);
+		Maze maze1 = new Maze(height, width);
 		maze1.setSeed(seed);
 		maze1.generateMaze();
 		
@@ -54,8 +54,6 @@ public class MazeTest {
 	
 	@Test
 	public void testFindNeighbors() {
-		LinkedList vertex = new LinkedList();
-		
 		int height = 5;
 		int width = 5;
 		Maze maze = new Maze(height, width);

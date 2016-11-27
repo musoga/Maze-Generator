@@ -65,7 +65,11 @@ public class Maze {
 				Node randomNeighbor = new Node();
 				randomNeighbor.setPosition(newPosition);
 				
+				Node currentCellNode = new Node();
+				currentCellNode.setPosition(currentCell);
+				
 				mazeGraph[currentCell].add(randomNeighbor);
+				mazeGraph[randomNeighbor.getPosition()].add(currentCellNode);
 				
 				cellStack.push(currentCell);
 				currentCell = newPosition;
