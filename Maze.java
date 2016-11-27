@@ -60,13 +60,15 @@ public class Maze {
 			
 			if(neighbors.size() > 0) {
 				int randomNeighborPosition = randomGenerator.nextInt(neighbors.size());
+				int newPosition = neighbors.get(randomNeighborPosition).getPosition();
+				
 				Node randomNeighbor = new Node();
-				randomNeighbor.setPosition(randomNeighborPosition);
+				randomNeighbor.setPosition(newPosition);
 				
 				mazeGraph[currentCell].add(randomNeighbor);
 				
 				cellStack.push(currentCell);
-				currentCell = randomNeighborPosition;
+				currentCell = newPosition;
 				visitedCells++;
 			}
 			else {
@@ -96,18 +98,18 @@ public class Maze {
 		
 		for(int index = 0;index < MAX_NEIGHBORS;index++) {
 			Node cellToConsider = new Node();
-			cellToConsider.setPosition(neighborPosition[index]);
+			int neighborToConsider = neighborPosition[index];
+			cellToConsider.setPosition(neighborToConsider);
 			
-			int initialValue = neighborPosition[index] < 0 
-								|| neighborPosition[index] >= height * width
-								|| (position + 1) % width == 0 && neighborPosition[index] - position == 1
-								|| (position + 1) % width == 1 && position - neighborPosition[index] == 1
-								? -1 : neighborPosition[index];
-			
-			cellToConsider.setPosition(initialValue);
-			
-			if(cellToConsider.getPosition() != -1) {
+								
+			if(neighborToConsider >= 0
+			&& neighborToConsider < height * width
+			&& ((position + 1) % width != 0 || neighborToConsider - position != 1)
+			&& ((position + 1) % width != 1 || position - neighborToConsider != 1)
+			&& mazeGraph[neighborToConsider].length() == 0) {
+				
 				neighbors.add(cellToConsider);
+				
 			}
 		}
 		
