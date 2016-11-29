@@ -82,12 +82,12 @@ public class Maze {
 	}
 	
 	/**
-   Two parameter constructor that seeds the random number generator and intializes 
-   the dimensions
+	Auxiliary function for the maze generation algorithm
+	to find adjacent neighbors that haven't been visited
 
-   @param currentCell Cell to search for neighbors
+	@param position current cell to examine
    
-   @return ArrayList<Node> List of neighbors to use for maze generation
+	@return ArrayList<Node> List of neighbors to use for maze generation
 
 	*/
 	public ArrayList<Node> findNeighbors(int position) {
