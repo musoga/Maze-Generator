@@ -122,7 +122,14 @@ public class Maze {
 	}
 	
 	public void searchMazeBFS() {
-		PriorityQueue<Node> stock= new PriorityQueue<>();
+		PriorityQueue<Node> queue= new PriorityQueue<>();
+		Node s= mazeGraph[0].head;
+		s.setColor(Node.Colors.GREY);
+		
+		queue.add(s);
+		while(!queue.isEmpty()){
+			
+		}
 		
 	}
 	
