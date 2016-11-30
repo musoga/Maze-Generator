@@ -48,7 +48,12 @@ public class MazeTest {
 	
 	@Test
 	public void testGenerateMaze() {
-		;
+		checkAcyclic();
+	}
+	
+	public boolean checkAcyclic() {
+		
+		return false;
 	}
 	
 	@Test
