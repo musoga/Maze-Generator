@@ -3,6 +3,7 @@ package sjsu.cs146.project3;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
+import java.util.PriorityQueue;
 
 public class Maze {
 	/**
@@ -141,8 +142,15 @@ public class Maze {
 	}
 	
 	public void searchMazeBFS() {
-		// TODO - finish function
-		;
+		PriorityQueue<Node> queue= new PriorityQueue<>();
+		Node s= mazeGraph[0].head;
+		s.setColor(Node.Colors.GREY);
+		
+		queue.add(s);
+		while(!queue.isEmpty()){
+			
+		}
+		
 	}
 	
 	public void searchMazeDFS() {
