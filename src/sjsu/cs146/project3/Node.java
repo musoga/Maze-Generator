@@ -39,9 +39,25 @@ public class Node {
 	public void setColor(Colors newColor) {
 		color = newColor;
 	}
+	/**
+	 * sets the distance of how 
+	 * far the node from the source
+	 * @param num
+	 */
+	public void setDistance(int num){
+		distance=num;
+	}
+	/**
+	 * returns the value of distance
+	 * @return distance
+	 */
+	public int getDistance(){
+		return distance;
+	}
 	
 	public Node next;
 	public enum Colors { WHITE, BLACK, GREY };
+	public int distance;
 	private Colors color;
 	private int position;
 }
