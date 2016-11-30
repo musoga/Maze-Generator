@@ -56,7 +56,7 @@ public class Maze {
 		int visitedCells = 1;
 		
 		while(visitedCells < totalCells) {
-			ArrayList<Node> neighbors = findNeighbors(currentCell);
+			ArrayList<Node> neighbors = findNeighborsGeneration(currentCell);
 			
 			if(neighbors.size() > 0) {
 				int randomNeighborPosition = randomGenerator.nextInt(neighbors.size());
@@ -82,7 +82,7 @@ public class Maze {
 	}
 	
 	/**
-	Auxiliary function for the maze generation algorithm
+	Auxiliary function for the search algorithms
 	to find adjacent neighbors that haven't been visited
 
 	@param position current cell to examine
@@ -90,7 +90,7 @@ public class Maze {
 	@return ArrayList<Node> List of neighbors to use for maze generation
 
 	*/
-	public ArrayList<Node> findNeighbors(int position) {
+	public ArrayList<Node> findNeighborsGeneration(int position) {
 		ArrayList<Node> neighbors = new ArrayList<Node>();
 		
 		final int MAX_NEIGHBORS = 4;
@@ -115,6 +115,26 @@ public class Maze {
 				neighbors.add(cellToConsider);
 				
 			}
+		}
+		
+		return neighbors;
+	}
+	/**
+	Auxiliary function for the maze generation algorithm
+	to find adjacent neighbors that haven't been visited
+
+	@param position current cell to examine
+   
+	@return ArrayList<Node> List of neighbors to use for maze generation
+
+	*/
+	public ArrayList<Node> findNeighbors(int position) {
+		Node current = mazeGraph[position].head;
+		ArrayList<Node> neighbors = new ArrayList<Node>();
+		
+		while(current != null) {
+			neighbors.add(current);
+			current = current.next;
 		}
 		
 		return neighbors;
