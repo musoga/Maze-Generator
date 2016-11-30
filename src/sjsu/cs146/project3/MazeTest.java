@@ -48,12 +48,51 @@ public class MazeTest {
 	
 	@Test
 	public void testGenerateMaze() {
-		checkAcyclic();
+		int height = 5;
+		int width = 5;
+		
+		Maze maze = new Maze(height, width);
+		maze.generateMaze();
+		
+		int startPosition = 0;
 	}
 	
-	public boolean checkAcyclic() {
+	public boolean checkAcyclic(Node cellToCheck) {
+		if(cellToCheck.getColor() == Node.Colors.GREY) {
+			return false;
+		}
+		cellToCheck.setColor(Node.Colors.GREY);
 		
+		
+		//for 
 		return false;
+	}
+	
+	@Test
+	public void testFindNeighborsGeneration() {
+		int height = 5;
+		int width = 5;
+		Maze maze = new Maze(height, width);
+		
+		int[] positionsToTest = {0,2,4,10,14,20,22,24};
+		int[][] neighborsToCheck = {{1,5},
+				{1,3,7},
+				{3,9},
+				{5,11,15},
+				{9,13,19},
+				{15,21},
+				{17,21,23},
+				{19,23}};
+		
+		final int TEST_CASES = 8;
+		
+		for(int testCase = 0;testCase < TEST_CASES;testCase++) {
+			ArrayList<Node> neighbors = maze.findNeighborsGeneration(positionsToTest[testCase]);
+			
+			for(int index = 0;index < neighbors.size();index++) {
+				assertEquals(neighborsToCheck[testCase][index], neighbors.get(index).getPosition());
+			}
+		}
 	}
 	
 	@Test
