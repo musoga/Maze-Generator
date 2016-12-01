@@ -46,7 +46,7 @@ public class MazeTest {
 			}
 		}
 	}
-	@Ignore
+	
 	@Test
 	public void testGenerateMaze() {
 		int height = 5;
@@ -175,7 +175,22 @@ public class MazeTest {
 	
 	@Test
 	public void testSearchMazeDFS() {
-		;
+		int height = 4;
+		int width = 4;
+		
+		for(int testCount = 0;testCount < 100;testCount++) {
+			Maze maze = new Maze(height, width);
+			
+			maze.generateMaze();
+			
+			maze.searchMazeDFS();
+			
+			Node cell = maze.vertices[height * width - 1];
+			while(cell.getParent() >= 0) {
+				cell = maze.vertices[cell.getParent()];
+			}
+			assertEquals(cell.getPosition(), 0);
+		}
 	}
 	
 	@Test

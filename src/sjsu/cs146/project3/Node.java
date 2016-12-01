@@ -4,6 +4,8 @@ public class Node {
 	Node() {
 		next = null;
 		color = Colors.WHITE;
+		distance = -1;
+		parent = -1;
 	}
 	
 	/**
