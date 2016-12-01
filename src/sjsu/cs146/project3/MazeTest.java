@@ -51,14 +51,25 @@ public class MazeTest {
 		int height = 5;
 		int width = 5;
 		
-		Maze maze = new Maze(height, width);
-		maze.generateMaze();
-		
 		int startPosition = 0;
 		
-		checkAcyclic(maze, height * width, startPosition);
+		for(int i = 0; i < 100;i++) {
+			Maze maze = new Maze(height, width);
+			maze.generateMaze();	
+			
+			assertTrue(checkAcyclic(maze, height * width, startPosition));
+		}
 	}
 	
+	/**
+	 * Wrapper function for checkAcyclicRecursive()
+	 * that initializes the array of colors for the modified depth first search
+	 * 
+	 * @param maze
+	 * @param size
+	 * @param position
+	 * @return
+	 */
 	public boolean checkAcyclic(Maze maze, int size, int position) {
 		Node.Colors[] visited = new Node.Colors[size];
 		
