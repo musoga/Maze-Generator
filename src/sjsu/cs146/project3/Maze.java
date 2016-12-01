@@ -1,5 +1,6 @@
 package sjsu.cs146.project3;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -18,6 +19,9 @@ public class Maze {
 
 	*/
 	Maze(int startHeight, int startWidth) {
+		lengthOfSide=(1+(startHeight*2));
+		mazeString= new String[lengthOfSide*lengthOfSide];
+
 		randomGenerator = new Random();
 		randomGenerator.setSeed(System.currentTimeMillis());
 		
@@ -29,6 +33,26 @@ public class Maze {
 		for(int index = 0;index < mazeGraph.length;index++) {
 			mazeGraph[index] = new LinkedList();
 		}
+
+		for (int i = 0; i < mazeString.length; i++) {
+
+			if (i % lengthOfSide == 0 && i%2==1) {
+				for (int x = 1; x <= lengthOfSide; x++) {
+					if (x % 2 == 1) {
+						mazeString[i] = "|";
+					} else {
+						mazeString[i] = "  ";
+					}
+					i++;
+				}
+			} if (i % 2 == 0) {
+				mazeString[i] = "+";
+			} else {
+				mazeString[i] = "--";
+			}
+		}
+		mazeString[1]="  ";
+		mazeString[mazeString.length-2]="  ";
 	}
 	
 	public LinkedList[] getMazeGraph() {
@@ -148,9 +172,18 @@ public class Maze {
 		
 		queue.add(s);
 		while(!queue.isEmpty()){
-			
-		}
-		
+			Node u= queue.poll();
+			ArrayList<Node> hold= this.findNeighbors(u.getPosition());
+
+			for (Node v : hold) {
+				if (v.getColor() != Node.Colors.WHITE) {
+					v.setColor(Node.Colors.GREY);
+					v.setDistance(u.getDistance() + 1);
+					queue.add(v);
+				}
+			}
+			u.setColor(Node.Colors.BLACK);
+		}		
 	}
 	
 	public void searchMazeDFS() {
@@ -159,14 +192,24 @@ public class Maze {
 	}
 	
 	public void printMaze() {
-		//TODO - finish function
-		;
+		for(int i=0; i<mazeString.length;i++){
+			
+			if(i%lengthOfSide==0 && i!=0){
+				System.out.println();
+				System.out.print(mazeString[i]);
+			}
+			else{
+				System.out.print(mazeString[i]);
+			}
+		}
 	}
 	
 	public void setSeed(long seed) {
 		randomGenerator.setSeed(seed);
 	}
 	
+	private String[] mazeString;
+	private int lengthOfSide;
 	private LinkedList[] mazeGraph;
 	private Random randomGenerator;
 	private int height;
