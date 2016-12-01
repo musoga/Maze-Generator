@@ -45,7 +45,7 @@ public class Node {
 	 * @param num
 	 */
 	public void setDistance(int num){
-		distance=num;
+		distance = num;
 	}
 	/**
 	 * returns the value of distance
@@ -55,9 +55,18 @@ public class Node {
 		return distance;
 	}
 	
+	public void setParent(int newParent) {
+		parent = newParent;
+	}
+	
+	public int getParent() {
+		return parent;
+	}
+	
 	public Node next;
 	public enum Colors { WHITE, BLACK, GREY };
-	public int distance;
+	private int distance;
+	private int parent;
 	private Colors color;
 	private int position;
 }

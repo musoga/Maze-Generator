@@ -53,6 +53,8 @@ public class Maze {
 		}
 		mazeString[1]="  ";
 		mazeString[mazeString.length-2]="  ";
+		
+		initializeVertices();
 	}
 	
 	public LinkedList[] getMazeGraph() {
@@ -187,7 +189,6 @@ public class Maze {
 	}
 	
 	public void searchMazeDFS() {
-		//TODO - finish function
 		;
 	}
 	
@@ -208,9 +209,18 @@ public class Maze {
 		randomGenerator.setSeed(seed);
 	}
 	
+	private void initializeVertices() {
+		vertices = new Node[height * width];
+		for(int index = 0;index < vertices.length;index++) {
+			vertices[index] = new Node();
+			vertices[index].setPosition(index);
+		}
+	}
+	
 	private String[] mazeString;
 	private int lengthOfSide;
 	private LinkedList[] mazeGraph;
+	private Node[] vertices;
 	private Random randomGenerator;
 	private int height;
 	private int width;
