@@ -189,7 +189,32 @@ public class Maze {
 	}
 	
 	public void searchMazeDFS() {
-		;
+		Node[] original = vertices;
+		int time = 0;
+		for(Node vertex : vertices) {
+			if(vertex.getColor() == Node.Colors.WHITE) {
+				dfsVisit(vertex.getPosition(), time);
+			}
+		}
+		//TODO - calculate paths for print maze
+		//vertices = original;
+	}
+	
+	public void dfsVisit(int position, int time) {
+		time =  time + 1;
+		vertices[position].setDistance(time);
+		vertices[position].setColor(Node.Colors.GREY);
+		
+		for(Node neighbor : findNeighbors(position)) {
+			int neighborPosition = neighbor.getPosition();
+			if(vertices[neighborPosition].getColor() == Node.Colors.WHITE) {
+				vertices[neighborPosition] = vertices[position];
+				dfsVisit(neighborPosition ,time);
+			}
+		}
+		
+		vertices[position].setColor(Node.Colors.BLACK);
+		time = time + 1;
 	}
 	
 	public void printMaze() {
@@ -220,7 +245,7 @@ public class Maze {
 	private String[] mazeString;
 	private int lengthOfSide;
 	private LinkedList[] mazeGraph;
-	private Node[] vertices;
+	public Node[] vertices;
 	private Random randomGenerator;
 	private int height;
 	private int width;
