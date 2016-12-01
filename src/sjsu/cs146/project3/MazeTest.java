@@ -5,17 +5,18 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
  
 public class MazeTest {
 
-	@Before
+/*	@Before
 	public void setUp() throws Exception {
 		int height = 5;
 		int width = 5;
 		Maze maze = new Maze(height, width);
-	}
-	
+	}*/
+	@Ignore
 	@Test
 	public void testSetSeed() {
 		long seed = 0;
@@ -45,7 +46,7 @@ public class MazeTest {
 			}
 		}
 	}
-	
+	@Ignore
 	@Test
 	public void testGenerateMaze() {
 		int height = 5;
@@ -67,7 +68,7 @@ public class MazeTest {
 		//for 
 		return false;
 	}
-	
+	@Ignore
 	@Test
 	public void testFindNeighborsGeneration() {
 		int height = 5;
@@ -94,7 +95,7 @@ public class MazeTest {
 			}
 		}
 	}
-	
+	@Ignore
 	@Test
 	public void testFindNeighbors() {
 		int height = 5;
@@ -122,6 +123,14 @@ public class MazeTest {
 		}
 	}
 	
+	@Test
+	public void testPrinting() {
+		int height = 10;
+		int width = 10;
+		
+		Maze maze1 = new Maze(height, width);
+		maze1.printMaze();
+	}
 	@Test
 	public void testSearchMazeBFS() {
 		;
