@@ -55,17 +55,43 @@ public class MazeTest {
 		maze.generateMaze();
 		
 		int startPosition = 0;
+		
+		checkAcyclic(maze, height * width, startPosition);
 	}
 	
-	public boolean checkAcyclic(Node cellToCheck) {
-		if(cellToCheck.getColor() == Node.Colors.GREY) {
-			return false;
+	public boolean checkAcyclic(Maze maze, int size, int position) {
+		Node.Colors[] visited = new Node.Colors[size];
+		
+		for(int index = 0;index < visited.length;index++) {
+			visited[index] = Node.Colors.WHITE;
 		}
-		cellToCheck.setColor(Node.Colors.GREY);
 		
+		return checkAcyclicRecursive(maze, position, visited);
+	}
+	
+	
+	/**
+	 * Recursive function to check if maze is acyclic
+	 *
+	 * @param maze
+	 * @param position
+	 * @param visited
+	 * @return if maze is acyclic, true. else false
+	 */
+	public boolean checkAcyclicRecursive(Maze maze, int position, Node.Colors[] visited) {
+		visited[position] = Node.Colors.GREY;
 		
-		//for 
-		return false;
+		for(Node neighbor : maze.findNeighbors(position)) {
+			if(visited[neighbor.getPosition()] == Node.Colors.WHITE) {
+				checkAcyclicRecursive(maze, neighbor.getPosition(), visited);
+			}
+			else if(visited[neighbor.getPosition()] == Node.Colors.GREY) {
+				return false;
+			}
+		}
+		
+		visited[position] = Node.Colors.BLACK;
+		return true;
 	}
 	
 	@Test
