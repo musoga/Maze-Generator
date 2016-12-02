@@ -162,10 +162,12 @@ public class MazeTest {
 	
 	@Test
 	public void testPrinting() {
-		int height = 10;
-		int width = 10;
+		int height = 4;
+		int width = 4;
 		
 		Maze maze1 = new Maze(height, width);
+		maze1.generateMaze();
+		maze1.printMazeGraph();
 		maze1.printMaze();
 	}
 	@Test

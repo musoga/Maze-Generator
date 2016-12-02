@@ -1,6 +1,5 @@
 package sjsu.cs146.project3;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -33,9 +32,10 @@ public class Maze {
 		for(int index = 0;index < mazeGraph.length;index++) {
 			mazeGraph[index] = new LinkedList();
 		}
-
+		
+		// creates a blank maze to be changed
 		for (int i = 0; i < mazeString.length; i++) {
-
+			
 			if (i % lengthOfSide == 0 && i%2==1) {
 				for (int x = 1; x <= lengthOfSide; x++) {
 					if (x % 2 == 1) {
@@ -167,6 +167,10 @@ public class Maze {
 		return neighbors;
 	}
 	
+	/**
+	 * uses breadth first search to 
+	 * find the maze
+	 */
 	public void searchMazeBFS() {
 		PriorityQueue<Node> queue= new PriorityQueue<>();
 		Node s= mazeGraph[0].head;
@@ -216,19 +220,47 @@ public class Maze {
 		vertices[position].setColor(Node.Colors.BLACK);
 		time[0] += 1;
 	}
-	
+
+	/**
+	 * prints the mazeString array
+	 */
 	public void printMaze() {
-		for(int i=0; i<mazeString.length;i++){
+		int cellPosition=lengthOfSide+1;
+
+		for (int nodeCell = 0; nodeCell < mazeGraph.length; nodeCell++) {
+			ArrayList<Node> neighbors= this.findNeighbors(nodeCell);
 			
-			if(i%lengthOfSide==0 && i!=0){
+			for(Node n: neighbors){
+				int position=n.getPosition();
+				
+				if ( position- nodeCell == 1) {
+					mazeString[cellPosition+ 1]=" ";
+					
+				} else if (position- nodeCell > 1) {
+					mazeString[cellPosition+lengthOfSide]="  ";
+				}
+			}
+			
+			cellPosition+=2;
+			if(mazeString[cellPosition].equals("+")){
+				cellPosition+=lengthOfSide+1;
+			}
+		}
+		
+		
+		for (int i = 0; i < mazeString.length; i++) {
+
+			if (i % lengthOfSide == 0 && i != 0) {
 				System.out.println();
 				System.out.print(mazeString[i]);
-			}
-			else{
+			} else {
 				System.out.print(mazeString[i]);
 			}
 		}
+		System.out.println();
 	}
+	
+	
 	
 	public void setSeed(long seed) {
 		randomGenerator.setSeed(seed);
@@ -240,6 +272,18 @@ public class Maze {
 			vertices[index] = new Node();
 			vertices[index].setPosition(index);
 		}
+	}
+	public void printMazeGraph(){
+		for (int i = 0; i < mazeGraph.length; i++) {
+			System.out.print(i);
+			Node head= mazeGraph[i].head;
+			while(head!=null){
+				System.out.print("-->"+head.getPosition());
+				head=head.next;
+			}
+			System.out.println();
+		}
+			
 	}
 	
 	private String[] mazeString;
