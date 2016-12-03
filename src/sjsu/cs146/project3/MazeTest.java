@@ -199,5 +199,19 @@ public class MazeTest {
 	public void testPrintMaze() {
 		;
 	}
+	
+	@Test
+	public void testPrintSearchMaze() {
+		int height = 4;
+		int width = 4;
+		
+		Maze maze = new Maze(height, width);
+		
+		maze.generateMaze();
+		
+		maze.searchMazeDFS();
+		
+		maze.printMazeDiscoveryTime();
+	}
 
 }

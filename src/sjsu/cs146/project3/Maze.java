@@ -266,6 +266,81 @@ public class Maze {
 		System.out.println();
 	}
 	
+	/**
+	 * printMaze variant that displays
+	 * the discovery time of each cell
+	 * note: DFS search or BFS search must
+	 * be called before use
+	 */
+	public void printMazeDiscoveryTime() {
+		int cellPosition=lengthOfSide+1;
+
+		for (int nodeCell = 0; nodeCell < mazeGraph.length; nodeCell++) {
+			ArrayList<Node> neighbors= this.findNeighbors(nodeCell);
+			
+			int discoveryTime = vertices[nodeCell].getDistance();
+			mazeString[cellPosition] = discoveryTime < 10 ? "0" + Integer.toString(discoveryTime) : Integer.toString(discoveryTime);
+			
+			for(Node n: neighbors){
+				int position=n.getPosition();
+				
+				if ( position- nodeCell == 1) {
+					mazeString[cellPosition+ 1]=" ";
+					
+				} else if (position- nodeCell > 1) {
+					mazeString[cellPosition+lengthOfSide]="  ";
+				}
+			}
+			
+			cellPosition+=2;
+			if(mazeString[cellPosition].equals("+")){
+				cellPosition+=lengthOfSide+1;
+			}
+		}
+		
+		for (int i = 0; i < mazeString.length; i++) {
+
+			if (i % lengthOfSide == 0 && i != 0) {
+				System.out.println();
+				System.out.print(mazeString[i]);
+			} else {
+				System.out.print(mazeString[i]);
+			}
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * printMaze variant that displays the maze
+	 * along with the shortest path
+	 * note: DFS search or BFS search must
+	 * be called before use
+	 * TODO -- implement function
+	 */
+	public void printMazeShortestPath() {
+		int cellPosition=lengthOfSide+1;
+
+		for (int nodeCell = 0; nodeCell < mazeGraph.length; nodeCell++) {
+			ArrayList<Node> neighbors= this.findNeighbors(nodeCell);
+			
+			for(Node n: neighbors){
+				int position=n.getPosition();
+				
+				if ( position- nodeCell == 1) {
+					mazeString[cellPosition+ 1]=" ";
+					
+				} else if (position- nodeCell > 1) {
+					mazeString[cellPosition+lengthOfSide]="  ";
+				}
+			}
+			
+			cellPosition+=2;
+			if(mazeString[cellPosition].equals("+")){
+				cellPosition+=lengthOfSide+1;
+			}
+		}
+	}
+	
 	
 	/**
 	 * 
