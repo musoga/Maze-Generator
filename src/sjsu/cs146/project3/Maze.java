@@ -192,6 +192,9 @@ public class Maze {
 		}		
 	}
 	
+	/**
+	 * Searches the maze using the depth first search algorithm
+	 */
 	public void searchMazeDFS() {
 		int[] time = new int[1];
 		time[0] = 0;
@@ -201,9 +204,13 @@ public class Maze {
 				dfsVisit(vertex.getPosition(), time);
 			}
 		}
-		//TODO - calculate paths for print maze
 	}
 	
+	/**
+	 * Recursive depth first search implementation called by SearchMazeDFS
+	 * @param position
+	 * @param time
+	 */
 	public void dfsVisit(int position, int[] time) {
 		time[0] += 1;
 		vertices[position].setDistance(time[0]);
@@ -247,7 +254,6 @@ public class Maze {
 			}
 		}
 		
-		
 		for (int i = 0; i < mazeString.length; i++) {
 
 			if (i % lengthOfSide == 0 && i != 0) {
@@ -261,11 +267,18 @@ public class Maze {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param seed
+	 */
 	public void setSeed(long seed) {
 		randomGenerator.setSeed(seed);
 	}
 	
+	/**
+	 * Function to initialize array of vertices
+	 * Used in the constructor
+	 */
 	private void initializeVertices() {
 		vertices = new Node[height * width];
 		for(int index = 0;index < vertices.length;index++) {
@@ -273,6 +286,7 @@ public class Maze {
 			vertices[index].setPosition(index);
 		}
 	}
+	
 	public void printMazeGraph(){
 		for (int i = 0; i < mazeGraph.length; i++) {
 			System.out.print(i);
