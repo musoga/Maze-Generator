@@ -161,19 +161,37 @@ public class MazeTest {
 	}
 	
 	@Test
-	public void testPrinting() {
+	public void testSearchMazeBFS() {
 		int height = 4;
 		int width = 4;
-		
-		Maze maze1 = new Maze(height, width);
-		maze1.generateMaze();
-		maze1.printMaze();
+
+		for (int testCount = 0; testCount < 100; testCount++) {
+			Maze maze = new Maze(height, width);
+
+			maze.generateMaze();
+
+			maze.searchMazeBFS();
+
+			Node cell = maze.vertices[height * width - 1];
+			System.out.println(cell.getParent());
+			while (cell.getParent() >= 0) {
+				cell = maze.vertices[cell.getParent()];
+			}
+			assertEquals(cell.getPosition(), 0);
+		}
+//		int height = 4;
+//		int width = 4;
+//		Maze maze = new Maze(height, width);
+//
+//		maze.generateMaze();
+//
+//		maze.searchMazeBFS();
+//		
+//		maze.printMaze();
+//		maze.printMazeDiscoveryTime();
+//		maze.printMazeShortestPath();
 	}
-	@Test
-	public void testSearchMazeBFS() {
-		;
-	}
-	
+	@Ignore
 	@Test
 	public void testSearchMazeDFS() {
 		int height = 4;
@@ -183,7 +201,7 @@ public class MazeTest {
 			Maze maze = new Maze(height, width);
 			
 			maze.generateMaze();
-			
+		
 			maze.searchMazeDFS();
 			
 			Node cell = maze.vertices[height * width - 1];
@@ -198,7 +216,7 @@ public class MazeTest {
 	public void testPrintMaze() {
 		;
 	}
-	
+	@Ignore
 	@Test
 	public void testPrintMazeDiscoveryTime() {
 		int height = 4;
@@ -212,7 +230,7 @@ public class MazeTest {
 		
 		maze.printMazeDiscoveryTime();
 	}
-	
+	@Ignore
 	@Test
 	public void testPrintMazeShortestPath() {
 		int height = 5;

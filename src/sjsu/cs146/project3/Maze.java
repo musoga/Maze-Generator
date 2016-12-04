@@ -1,9 +1,10 @@
 package sjsu.cs146.project3;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.ArrayDeque;
 import java.util.Random;
 import java.util.Stack;
-import java.util.PriorityQueue;
 
 public class Maze {
 	/**
@@ -57,10 +58,19 @@ public class Maze {
 		initializeVertices();
 	}
 	
+	/**
+	 * returns the mazeGraph array
+	 * @return mazeGraph
+	 */
 	public LinkedList[] getMazeGraph() {
 		return mazeGraph;
 	}
 	
+	/**
+	 * sets the mazeGraph to the given 
+	 * array
+	 * @param newMaze
+	 */
 	public void setMazeGraph(LinkedList[] newMaze) {
 		mazeGraph = newMaze;
 	}
@@ -146,6 +156,7 @@ public class Maze {
 		
 		return neighbors;
 	}
+	
 	/**
 	Auxiliary function for the maze generation algorithm
 	to find adjacent neighbors that haven't been visited
@@ -169,29 +180,36 @@ public class Maze {
 	
 	/**
 	 * uses breadth first search to 
-	 * find the maze
+	 * find the shortest path of the maze
 	 */
 	public void searchMazeBFS() {
-		PriorityQueue<Node> queue= new PriorityQueue<>();
-		Node s= mazeGraph[0].head;
-		s.setColor(Node.Colors.GREY);
-		
-		queue.add(s);
-		while(!queue.isEmpty()){
-			Node u= queue.poll();
-			ArrayList<Node> hold= this.findNeighbors(u.getPosition());
+
+		ArrayDeque<Node>queue= new ArrayDeque<>();
+
+		vertices[0].setColor(Node.Colors.GREY);
+		vertices[0].setDistance(0);
+
+		queue.add(vertices[0]);
+
+		while (!queue.isEmpty()) {
+			Node u = queue.pop();
+			ArrayList<Node> hold = this.findNeighbors(u.getPosition());
 
 			for (Node v : hold) {
-				if (v.getColor() != Node.Colors.WHITE) {
-					v.setColor(Node.Colors.GREY);
-					v.setDistance(u.getDistance() + 1);
-					queue.add(v);
+				int neighborPosition = v.getPosition();
+				if (vertices[neighborPosition].getColor() == Node.Colors.WHITE) {
+					
+					vertices[neighborPosition].setColor(Node.Colors.GREY);
+					vertices[neighborPosition].setDistance(u.getDistance() + 1);
+					vertices[neighborPosition].setParent(u.getPosition());
+					queue.push(vertices[neighborPosition]);
 				}
 			}
-			u.setColor(Node.Colors.BLACK);
-		}		
+			vertices[u.getPosition()].setColor(Node.Colors.BLACK);
+		}
+
 	}
-	
+
 	/**
 	 * Searches the maze using the depth first search algorithm
 	 */
@@ -323,7 +341,10 @@ public class Maze {
 		
 		PriorityQueue<Integer> path = new PriorityQueue<Integer>();
 		
-		for(int pathCell = mazeGraph.length - 1;pathCell > -1;pathCell = vertices[pathCell].getParent()) {
+		for(int pathCell = mazeGraph.length - 1;
+				pathCell > -1;
+				pathCell = vertices[pathCell].getParent()) {
+			
 			path.add(pathCell);
 		}
 		
@@ -384,7 +405,11 @@ public class Maze {
 			vertices[index].setPosition(index);
 		}
 	}
-	
+
+	/**
+	 * prints the adj. list Maze graph
+	 */
+
 	public void printMazeGraph(){
 		for (int i = 0; i < mazeGraph.length; i++) {
 			System.out.print(i);
@@ -398,10 +423,10 @@ public class Maze {
 			
 	}
 	
+	public Node[] vertices;
 	private String[] mazeString;
 	private int lengthOfSide;
 	private LinkedList[] mazeGraph;
-	public Node[] vertices;
 	private Random randomGenerator;
 	private int height;
 	private int width;
