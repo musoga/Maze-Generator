@@ -55,6 +55,11 @@ public class Maze {
 		mazeString[1]="  ";
 		mazeString[mazeString.length-2]="  ";
 		
+		uneditedMazeString = new String[mazeString.length];
+		for(int index = 0;index < mazeString.length;index++) {
+			uneditedMazeString[index] = mazeString[index];
+		}
+		
 		initializeVertices();
 	}
 	
@@ -183,7 +188,6 @@ public class Maze {
 	 * find the shortest path of the maze
 	 */
 	public void searchMazeBFS() {
-
 		ArrayDeque<Node>queue= new ArrayDeque<>();
 
 		vertices[0].setColor(Node.Colors.GREY);
@@ -207,7 +211,8 @@ public class Maze {
 			}
 			vertices[u.getPosition()].setColor(Node.Colors.BLACK);
 		}
-
+		
+		
 	}
 
 	/**
@@ -291,6 +296,9 @@ public class Maze {
 	 * be called before use
 	 */
 	public void printMazeDiscoveryTime() {
+		resetMazeString();
+		
+		
 		int cellPosition=lengthOfSide+1;
 
 		for (int nodeCell = 0; nodeCell < mazeGraph.length; nodeCell++) {
@@ -337,6 +345,8 @@ public class Maze {
 	 * modifies print maze if cell is in path
 	 */
 	public void printMazeShortestPath() {
+		resetMazeString();
+		
 		int cellPosition=lengthOfSide+1;
 		
 		PriorityQueue<Integer> path = new PriorityQueue<Integer>();
@@ -385,6 +395,12 @@ public class Maze {
 		System.out.println();
 	}
 	
+	private void resetMazeString() {
+		for(int index = 0;index < mazeString.length;index++) {
+			mazeString[index] = uneditedMazeString[index];
+		}
+	}
+	
 	
 	/**
 	 * 
@@ -425,6 +441,7 @@ public class Maze {
 	
 	public Node[] vertices;
 	private String[] mazeString;
+	private String[] uneditedMazeString;
 	private int lengthOfSide;
 	private LinkedList[] mazeGraph;
 	private Random randomGenerator;

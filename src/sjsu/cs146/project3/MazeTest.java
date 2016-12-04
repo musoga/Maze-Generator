@@ -173,23 +173,21 @@ public class MazeTest {
 			maze.searchMazeBFS();
 
 			Node cell = maze.vertices[height * width - 1];
-			System.out.println(cell.getParent());
 			while (cell.getParent() >= 0) {
 				cell = maze.vertices[cell.getParent()];
 			}
 			assertEquals(cell.getPosition(), 0);
 		}
-//		int height = 4;
-//		int width = 4;
-//		Maze maze = new Maze(height, width);
-//
-//		maze.generateMaze();
-//
-//		maze.searchMazeBFS();
-//		
-//		maze.printMaze();
-//		maze.printMazeDiscoveryTime();
-//		maze.printMazeShortestPath();
+		
+		Maze maze = new Maze(height, width);
+
+		maze.generateMaze();
+
+		maze.searchMazeBFS();
+		
+		maze.printMaze();
+		maze.printMazeDiscoveryTime();
+		maze.printMazeShortestPath();
 	}
 	@Ignore
 	@Test
