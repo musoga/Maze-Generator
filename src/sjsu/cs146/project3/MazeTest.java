@@ -167,7 +167,6 @@ public class MazeTest {
 		
 		Maze maze1 = new Maze(height, width);
 		maze1.generateMaze();
-		maze1.printMazeGraph();
 		maze1.printMaze();
 	}
 	@Test
@@ -201,7 +200,7 @@ public class MazeTest {
 	}
 	
 	@Test
-	public void testPrintSearchMaze() {
+	public void testPrintMazeDiscoveryTime() {
 		int height = 4;
 		int width = 4;
 		
@@ -212,6 +211,20 @@ public class MazeTest {
 		maze.searchMazeDFS();
 		
 		maze.printMazeDiscoveryTime();
+	}
+	
+	@Test
+	public void testPrintMazeShortestPath() {
+		int height = 5;
+		int width = 5;
+		
+		Maze maze = new Maze(height, width);
+		
+		maze.generateMaze();
+		
+		maze.searchMazeDFS();
+		
+		maze.printMazeShortestPath();
 	}
 
 }

@@ -315,13 +315,24 @@ public class Maze {
 	 * along with the shortest path
 	 * note: DFS search or BFS search must
 	 * be called before use
-	 * TODO -- implement function
+	 * 
 	 */
 	public void printMazeShortestPath() {
 		int cellPosition=lengthOfSide+1;
-
+		
+		PriorityQueue<Integer> path = new PriorityQueue<Integer>();
+		
+		for(int pathCell = mazeGraph.length - 1;pathCell > -1;pathCell = vertices[pathCell].getParent()) {
+			path.add(pathCell);
+		}
+		
 		for (int nodeCell = 0; nodeCell < mazeGraph.length; nodeCell++) {
 			ArrayList<Node> neighbors= this.findNeighbors(nodeCell);
+			
+			if(path.peek() == nodeCell) {
+				mazeString[cellPosition] = "##";
+				path.poll();
+			}
 			
 			for(Node n: neighbors){
 				int position=n.getPosition();
@@ -339,6 +350,17 @@ public class Maze {
 				cellPosition+=lengthOfSide+1;
 			}
 		}
+		
+		for (int i = 0; i < mazeString.length; i++) {
+
+			if (i % lengthOfSide == 0 && i != 0) {
+				System.out.println();
+				System.out.print(mazeString[i]);
+			} else {
+				System.out.print(mazeString[i]);
+			}
+		}
+		System.out.println();
 	}
 	
 	
