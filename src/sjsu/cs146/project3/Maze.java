@@ -315,7 +315,8 @@ public class Maze {
 	 * along with the shortest path
 	 * note: DFS search or BFS search must
 	 * be called before use
-	 * 
+	 * Adds path to priority queue then 
+	 * modifies print maze if cell is in path
 	 */
 	public void printMazeShortestPath() {
 		int cellPosition=lengthOfSide+1;
