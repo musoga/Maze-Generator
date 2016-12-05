@@ -56,11 +56,17 @@ public class Node {
 	public int getDistance(){
 		return distance;
 	}
-	
+	/**
+	 * sets the parent of the node
+	 * @param newParent
+	 */
 	public void setParent(int newParent) {
 		parent = newParent;
 	}
-	
+	/**
+	 *  get the parent of the node
+	 * @return parent
+	 */
 	public int getParent() {
 		return parent;
 	}

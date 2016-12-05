@@ -394,7 +394,10 @@ public class Maze {
 		}
 		System.out.println();
 	}
-	
+	/**
+	 * Resets the MazeStrings the
+	 * original blank maze 
+	 */
 	private void resetMazeString() {
 		for(int index = 0;index < mazeString.length;index++) {
 			mazeString[index] = uneditedMazeString[index];
@@ -403,7 +406,8 @@ public class Maze {
 	
 	
 	/**
-	 * 
+	 * sets the seed for the random
+	 * number generartor object
 	 * @param seed
 	 */
 	public void setSeed(long seed) {

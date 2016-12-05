@@ -16,7 +16,7 @@ public class MazeTest {
 		int width = 5;
 		Maze maze = new Maze(height, width);
 	}*/
-	@Ignore
+	
 	@Test
 	public void testSetSeed() {
 		long seed = 0;
@@ -105,7 +105,7 @@ public class MazeTest {
 		visited[position] = Node.Colors.BLACK;
 		return true;
 	}
-	@Ignore
+	
 	@Test
 	public void testFindNeighborsGeneration() {
 		int height = 5;
@@ -132,7 +132,7 @@ public class MazeTest {
 			}
 		}
 	}
-	@Ignore
+	
 	@Test
 	public void testFindNeighbors() {
 		int height = 5;
@@ -178,18 +178,8 @@ public class MazeTest {
 			}
 			assertEquals(cell.getPosition(), 0);
 		}
-		
-		Maze maze = new Maze(height, width);
-
-		maze.generateMaze();
-
-		maze.searchMazeBFS();
-		
-		maze.printMaze();
-		maze.printMazeDiscoveryTime();
-		maze.printMazeShortestPath();
 	}
-	@Ignore
+	
 	@Test
 	public void testSearchMazeDFS() {
 		int height = 4;
@@ -214,7 +204,7 @@ public class MazeTest {
 	public void testPrintMaze() {
 		;
 	}
-	@Ignore
+	
 	@Test
 	public void testPrintMazeDiscoveryTime() {
 		int height = 4;
@@ -228,7 +218,7 @@ public class MazeTest {
 		
 		maze.printMazeDiscoveryTime();
 	}
-	@Ignore
+	
 	@Test
 	public void testPrintMazeShortestPath() {
 		int height = 5;
