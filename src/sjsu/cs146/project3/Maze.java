@@ -255,6 +255,7 @@ public class Maze {
 	 * prints the mazeString array
 	 */
 	public void printMaze() {
+		System.out.println("Blank Maze");
 		int cellPosition=lengthOfSide+1;
 
 		for (int nodeCell = 0; nodeCell < mazeGraph.length; nodeCell++) {
@@ -296,6 +297,7 @@ public class Maze {
 	 * be called before use
 	 */
 	public void printMazeDiscoveryTime() {
+		System.out.println("Maze with discovered order of cells");
 		resetMazeString();
 		
 		
@@ -345,6 +347,8 @@ public class Maze {
 	 * modifies print maze if cell is in path
 	 */
 	public void printMazeShortestPath() {
+		
+		System.out.println("Maze with the Shortest Path");
 		resetMazeString();
 		
 		int cellPosition=lengthOfSide+1;
